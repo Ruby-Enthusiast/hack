@@ -59,15 +59,13 @@ class ResultView(View):
         # Get the aggregated data from the Choice model
         aggregated_data = Choice.objects.values('choice_code').annotate(total_value=models.Sum('choice_value'))
 
-        # Create a dictionary {choice_code: total_value}
+        # Create a dictionary {choice_code: total_value} directly from aggregated_data
         result_dict = {entry['choice_code']: entry['total_value'] for entry in aggregated_data}
 
-        # Sort the dictionary by total_value in descending order
-        sorted_result = dict(sorted(result_dict.items(), key=lambda item: item[1], reverse=True))
-
         context = {
-            'sorted_result': sorted_result,
+            'result_dict': result_dict,
             'aggregated_data': aggregated_data,
         }
 
         return render(request, self.template_name, context)
+
