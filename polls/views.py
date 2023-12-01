@@ -16,6 +16,8 @@ class PollView(View):
 
         # Check if a choice is selected
         choice_value = request.POST.get(f'question_{question_id}')
+        choice_code = request.POST.get(f'choice_code_{question_id}')
+
         if choice_value is not None:
             # Check if there is an existing choice for the current question
             existing_choice = Choice.objects.filter(question=question).first()
@@ -23,10 +25,18 @@ class PollView(View):
             if existing_choice:
                 # Update the existing choice
                 existing_choice.choice_value = choice_value
+                
+                # Update choice_code based on the original question's question_code
+                existing_choice.choice_code = question.question_code
+                
                 existing_choice.save()
             else:
                 # Save the choice to the database
-                choice = Choice.objects.create(question=question, choice_value=choice_value)
+                choice = Choice.objects.create(
+                    question=question,
+                    choice_value=choice_value,
+                    choice_code=question.question_code  # Set choice_code based on original question
+                )
 
         # Determine the next question ID
         next_question_id = min(50, int(question_id) + 1)
@@ -39,7 +49,6 @@ class PollView(View):
             return HttpResponseRedirect(reverse('polls:submit_answers'))
 
         return render(request, self.template_name, {'question': question, 'question_id': question_id})
-
 
 
 def submit_answers(request):
