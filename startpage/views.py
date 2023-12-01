@@ -25,10 +25,16 @@ def start_page(request):
 def second_page(request):
     return render(request, 'second_page.html')
 
+from polls.models import CsvData
+from django.shortcuts import render
+
 def show_links(request):
-    # Generate a list of links between "/101-116.html"
-    links = [f"/{i}.html" for i in range(101, 117)]
-    
-    # Pass the list of links to the template
-    context = {'links': links}
+    # Fetch data from CsvData model
+    csv_data = CsvData.objects.filter(csv_code__range=(101, 116)).values('csv_code', 'csv_category')
+
+    # Create a dictionary with key as range(101, 117) and value as csv_category
+    links_dict = {entry['csv_code']: entry['csv_category'] for entry in csv_data}
+
+    # Pass the dictionary to the template
+    context = {'links_dict': links_dict}
     return render(request, 'show_links.html', context)

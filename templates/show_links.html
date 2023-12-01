@@ -9,9 +9,9 @@
 <body>
     <h1>Links between "/101-116.html"</h1>
     <ul>
-        {% for link in links %}
-            <!-- Remove the ".html" extension from the hyperlink -->
-            <li><a href="{{ link|slice:'0:-5' }}">{{ link|slice:'1:-5' }}</a></li>
+        {% for code, category in links_dict.items %}
+            <!-- Display csv_category while redirecting based on code -->
+            <li><a href="/{{ code }}/">{{ category }}</a></li>
         {% endfor %}
     </ul>
 </body>

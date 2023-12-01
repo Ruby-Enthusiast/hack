@@ -64,7 +64,9 @@
     <button type="submit" class="btn btn-primary">Next Question</button>
 </form>
 
+{% if question_id > 1 %}
 <a href="{% url 'polls:poll' question_id=question_id|add:'-1' %}" class="btn btn-secondary">Prev Question</a>
+{% endif %}
 
 <!-- Bootstrap JS and jQuery inclusion -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
