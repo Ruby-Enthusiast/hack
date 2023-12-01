@@ -1,5 +1,6 @@
 # start_page/views.py
 import random
+import itertools
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect

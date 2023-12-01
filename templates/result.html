@@ -9,10 +9,14 @@
 <body>
     <h1>Result Page</h1>
 
-    <h2>Sorted Results:</h2>
+    <h2>Result Dictionary:</h2>
     <ul>
-        {% for code, total_value in sorted_result.items %}
-            <li>Choice Code: {{ code }} | Total Value: {{ total_value }}</li>
+        {% for code, total_value in result_dict.items %}
+            <li>
+                Choice Code: 
+                <a href="/{{ code }}/">{{ code }}</a>
+                | Total Value: {{ total_value }}
+            </li>
         {% endfor %}
     </ul>
 

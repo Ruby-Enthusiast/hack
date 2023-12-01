@@ -1,3 +1,4 @@
+import itertools
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.db import models
@@ -68,4 +69,3 @@ class ResultView(View):
         }
 
         return render(request, self.template_name, context)
-
