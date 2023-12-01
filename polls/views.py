@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View
+from django.db import models
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Question, Choice, CsvData
@@ -39,9 +40,10 @@ class PollView(View):
                 )
 
         # Determine the next question ID
-        next_question_id = min(50, int(question_id) + 1)
+        total_questions = Question.objects.count()
+        next_question_id = min(total_questions, int(question_id) + 1)
 
-        if next_question_id <= 50:
+        if next_question_id < total_questions:
             # If there are more questions, go to the next question
             return HttpResponseRedirect(reverse('polls:poll', args=[next_question_id]))
         else:
@@ -50,7 +52,22 @@ class PollView(View):
 
         return render(request, self.template_name, {'question': question, 'question_id': question_id})
 
+class ResultView(View):
+    template_name = 'result.html'
 
-def submit_answers(request):
-    # Implement logic to process and store all user answers
-    return render(request, 'submit_answers.html')
+    def get(self, request):
+        # Get the aggregated data from the Choice model
+        aggregated_data = Choice.objects.values('choice_code').annotate(total_value=models.Sum('choice_value'))
+
+        # Create a dictionary {choice_code: total_value}
+        result_dict = {entry['choice_code']: entry['total_value'] for entry in aggregated_data}
+
+        # Sort the dictionary by total_value in descending order
+        sorted_result = dict(sorted(result_dict.items(), key=lambda item: item[1], reverse=True))
+
+        context = {
+            'sorted_result': sorted_result,
+            'aggregated_data': aggregated_data,
+        }
+
+        return render(request, self.template_name, context)
