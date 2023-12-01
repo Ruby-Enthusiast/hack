@@ -60,8 +60,20 @@ class ResultView(View):
         # Get the aggregated data from the Choice model
         aggregated_data = Choice.objects.values('choice_code').annotate(total_value=models.Sum('choice_value'))
 
-        # Create a dictionary {choice_code: total_value} directly from aggregated_data
-        result_dict = {entry['choice_code']: entry['total_value'] for entry in aggregated_data}
+        # Create a list of tuples (choice_code, total_value) from aggregated_data
+        result_list = [(entry['choice_code'], entry['total_value']) for entry in aggregated_data]
+
+        # Apply quicksort based on the 'total_value'
+        sorted_result = self.quicksort(result_list, key=lambda x: x[1])
+
+        # Read CsvData model to get csv_code and csv_category
+        csv_data = CsvData.objects.values('csv_code', 'csv_category')
+
+        # Create a dictionary {csv_code: csv_category}
+        csv_dict = {entry['csv_code']: entry['csv_category'] for entry in csv_data}
+
+        # Create the final dictionary with three values (choice_code, total_value, csv_category)
+        result_dict = {choice_code: (total_value, csv_dict.get(choice_code, None)) for choice_code, total_value in sorted_result}
 
         context = {
             'result_dict': result_dict,
@@ -69,3 +81,12 @@ class ResultView(View):
         }
 
         return render(request, self.template_name, context)
+
+    def quicksort(self, arr, key):
+        if len(arr) <= 1:
+            return arr
+        pivot = arr[len(arr) // 2]
+        left = [x for x in arr if key(x) > key(pivot)]
+        middle = [x for x in arr if key(x) == key(pivot)]
+        right = [x for x in arr if key(x) < key(pivot)]
+        return self.quicksort(left, key) + middle + self.quicksort(right, key)

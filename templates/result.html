@@ -11,14 +11,12 @@
 
     <h2>Result Dictionary:</h2>
     <ul>
-        {% for code, total_value in result_dict.items %}
+        {% for code, values in result_dict.items %}
             <li>
-                Choice Code: 
-                <a href="/{{ code }}/">{{ code }}</a>
-                | Total Value: {{ total_value }}
+                <a href="/{{ code }}/">{{ values.1|default:"N/A" }}</a>
+                | Total Value: {{ values.0 }}
             </li>
         {% endfor %}
     </ul>
-
 </body>
 </html>
