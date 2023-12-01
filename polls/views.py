@@ -53,6 +53,7 @@ class PollView(View):
 
         return render(request, self.template_name, {'question': question, 'question_id': question_id})
 
+
 class ResultView(View):
     template_name = 'result.html'
 
@@ -73,10 +74,13 @@ class ResultView(View):
         csv_dict = {entry['csv_code']: entry['csv_category'] for entry in csv_data}
 
         # Create the final dictionary with three values (choice_code, total_value, csv_category)
-        result_dict = {choice_code: (total_value, csv_dict.get(choice_code, None)) for choice_code, total_value in sorted_result}
+        result_dict = {choice_code: {'total_value': total_value, 'csv_category': csv_dict.get(choice_code, None)} for choice_code, total_value in sorted_result}
+
+        # Extract top 3 {key: value} pairs with the highest total_value
+        top_3_result = dict(list(result_dict.items())[:3])
 
         context = {
-            'result_dict': result_dict,
+            'top_3_result': top_3_result,
             'aggregated_data': aggregated_data,
         }
 

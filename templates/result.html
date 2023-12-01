@@ -9,12 +9,12 @@
 <body>
     <h1>Result Page</h1>
 
-    <h2>Result Dictionary:</h2>
+    <h2>Top 3 Results:</h2>
     <ul>
-        {% for code, values in result_dict.items %}
+        {% for code, values in top_3_result.items %}
             <li>
-                <a href="/{{ code }}/">{{ values.1|default:"N/A" }}</a>
-                | Total Value: {{ values.0 }}
+                <a href="/{{ code }}/">{{ values.csv_category|default:"N/A" }}</a>
+                | Total Value: {{ values.total_value }}
             </li>
         {% endfor %}
     </ul>
