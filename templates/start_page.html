@@ -1,14 +1,53 @@
 <!-- startpage/templates/startpage/start_page.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Start Page</title>
+    <title>환영합니다 - 시작 페이지</title>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+        }
+
+        h1 {
+            color: #336699;
+            margin-top: 50px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        a {
+            display: inline-block;
+            padding: 15px 40px;
+            margin-top: 40px;
+            font-size: 1.2em;
+            text-decoration: none;
+            color: #fff;
+            background-color: #336699;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #25415f;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Start Page</h1>
-    <a href="{% url 'startpage:start_page_view' %}">Start</a>
-    </form>
+    <h1>Welcome</h1>
+    <p>Career Compass for Students</p>
+    <a href="{% url 'startpage:start_page_view' %}">시작하기</a>
 </body>
 </html>

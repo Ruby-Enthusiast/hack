@@ -24,6 +24,8 @@ def delete_comment(request, code, comment_id):
         if password == comment.password:
             comment.delete()
             return redirect('comments_list_and_add', code=code)
+        else:
+            return redirect('comments_list_and_add', code=code)
 
     return render(request, 'delete_comment.html', {'comment': comment, 'code': code})
 

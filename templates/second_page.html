@@ -1,0 +1,16 @@
+<!-- startpage/templates/startpage/second_page.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Page</title>
+</head>
+<body>
+    <h1>Choose an Option</h1>
+    <ul>
+        <li><a href="{% url 'polls:poll' 1 %}">Option 1</a></li>
+        <li><a href="{% url 'startpage:show_links' %}">Option 2</a></li>
+    </ul>
+</body>
+</html>

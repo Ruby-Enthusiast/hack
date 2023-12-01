@@ -1,0 +1,18 @@
+<!-- startpage/templates/startpage/show_links.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Links</title>
+</head>
+<body>
+    <h1>Links between "/101-116.html"</h1>
+    <ul>
+        {% for link in links %}
+            <!-- Remove the ".html" extension from the hyperlink -->
+            <li><a href="{{ link|slice:'0:-5' }}">{{ link|slice:'1:-5' }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
