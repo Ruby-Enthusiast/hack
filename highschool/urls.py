@@ -22,13 +22,14 @@ from startpage.views import start_page, start_page_view
 def poll_code_view(request, code):
     # Use the code to dynamically construct the template name
     template_name = f'{code}.html'
-    return render(request, template_name, {'question_id': code})
+    return render(request, template_name, {'code': code})
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("polls/", include('polls.urls')),
     path("startpage/", include('startpage.urls')),
+    path("", include('comment.urls')),  # Include comments app at the root level
     re_path(r'^(?P<code>\d+)/$', poll_code_view, name='poll_code'),
     re_path(r'^$', start_page, name='root_redirect'),
 ]

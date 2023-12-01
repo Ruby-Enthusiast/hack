@@ -1,0 +1,19 @@
+<!-- add_comment.html -->
+<h2>Add a Comment</h2>
+<form method="post" action="{% url 'add_comment' code=code %}">
+  {% csrf_token %}
+  <label for="id_author">Author:</label>
+  <input type="text" name="author" required>
+  <br>
+  <label for="id_text">Text:</label>
+  <!-- Use the 'cols' and 'rows' attributes to define the size of the text area -->
+  <textarea name="text" cols="40" rows="10" required></textarea>
+  <br>
+  <label for="id_password">Password:</label>
+  <input type="password" name="password" required>
+  <br>
+  <!-- Include the 'code' parameter in a hidden input field -->
+  <input type="hidden" name="code" value="{{ code }}">
+  <br>
+  <button type="submit">Submit</button>
+</form>
