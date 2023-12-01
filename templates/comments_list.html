@@ -1,4 +1,224 @@
-<h2>Comments for 한문</h2>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한문 교사 및 자습서 추천 리스트</title>
+    <style>
+        /* 공통 스타일 */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+
+        /* 교사 프로필 스타일 */
+        .teacher {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            border: 2px solid #008080;
+            border-radius: 10px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-image {
+            max-width: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        /* 자습서 추천 리스트 스타일 */
+        .book {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border: 2px solid #007BFF;
+            border-radius: 10px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .book img {
+            max-width: 100px;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        .book-info {
+            flex: 1;
+            font-weight: bold;
+        }
+
+        .book-price {
+            color: #28A745;
+            font-weight: bold;
+        }
+
+        /* 선배 추천 공부법 스타일 */
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .study-method {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 2px solid #007BFF;
+            border-radius: 10px;
+            background-color: #EAEAEA;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .method-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #007BFF;
+        }
+
+        .method-description {
+            line-height: 1.6;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 한문 교사 프로필 섹션 -->
+    <h1>한문 교사 프로필</h1>
+
+    <div class="teacher">
+        <img src="{% static 'teacher1.jpg' %}"alt="안승진" class="profile-image">
+        <div>
+            <div class="profile">
+                <span>교사1: 안승진</span>
+                <span>프로필: 성별 - 남 / 출생 - 2000.11.25 (23세)</span>
+            </div>
+            <div class="rating">강의평점: 4.9</div>
+            <div class="style">
+                <span>
+                    
+                    스타일: 한문 강의에서는 역사적인 이야기와 문학적인 텍스트를 통해 실생활에 자연스럽게 활용할 수 있는 지식을 전달하는 데 능숙하다.
+                    학생들과의 소통이 원활하며, 질문에 대한 세심한 답변으로 수업을 흥미진진하게 이끈다. 특히, 사례와 예시를 통해 어려운 문장과
+                    표현을 쉽게 설명하는 데 뛰어나다. 판서는 정교하고 간결하여 학생들이 내용을 명확하게 이해할 수 있다.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="teacher">
+        <img src="{% static 'teacher2.jpg' %}" alt="진재교" class="profile-image">
+        <div>
+            <div class="profile">
+                <span>교사2: 진재교</span>
+                <span>프로필: 성별 - 남 / 출생 - 1961.10.21 (62세)</span>
+            </div>
+            <div class="rating">강의평점: 4.7</div>
+            <div class="style">
+                <span>
+                    
+                    스타일: 한문 수업에서는 전통적인 교육 방식과 현대적인 접근을 융합하여 수업을 진행한다. 학문적인 엄격함과 유머 감각을 조화롭게
+                    섞어 흥미로운 분위기를 조성한다. 학생들과의 소통을 중요시하며, 언제든지 질문에 열린 자세로 답해준다. 한문 학습에 있어서 실생활에
+                    적용 가능한 예시를 통해 학생들의 흥미를 유발하며, 판서는 정돈된 획으로 명료하게 표현된다.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="teacher">
+        <img src="{% static 'teacher3.jpg' %}" alt="김경천" class="profile-image">
+        <div>
+            <div class="profile">
+                <span>교사3: 김경천</span>
+                <span>프로필: 성별 - 남 / 출생 - 1963.5.12 (60세)</span>
+            </div>
+            <div class="rating">강의평점: 4.6</div>
+            <div class="style">
+                <span>
+                    
+                    스타일: 한문 강의에서는 역동적이고 창의적인 접근으로 학문을 전달하는 데 뛰어나다. 수업 중 학생들과의 상호작용을 중시하며, 학생들이
+                    자발적으로 참여할 수 있는 환경을 조성한다. 특히, 한문 작품을 통해 감성적인 이야기를 전달하고, 학생들의 창의성을 촉진한다. 간간히 유머를
+                    섞어 즐거운 수업을 만들어내며, 판서는 감각적이고 아름다운 획으로 구성돼 있다.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 자습서 추천 리스트 섹션 -->
+    <h1>한문 자습서 추천 리스트</h1>
+
+    <div class="book">
+        <img src="{% static 'book1.jpg' %}" alt="고등학교 한문1 자습서(2024년용)">
+        <div class="book-info">
+            <span>고등학교 한문1 자습서(2024년용)</span><br>
+            <span>안재철 등저</span><br>
+            <span>지학사(학습)</span><br>
+            <span>2021년 01월</span>
+        </div>
+        <div class="book-price">가격: 17,100원</div>
+    </div>
+
+    <div class="book">
+        <img src="{% static 'book2.jpeg' %}" alt="고등학교 한문1 자습서">
+        <div class="book-info">
+            <span>고등학교 한문1 자습서</span><br>
+            <span>이승용 저</span><br>
+            <span>대학서림</span><br>
+            <span>2021년 02월</span>
+        </div>
+        <div class="book-price">가격: 17,000원</div>
+    </div>
+
+    <div class="book">
+        <img src="{% static 'book3.jpeg' %}" alt="고등학교 한문1 평가문제집 겸용 자습서">
+        <div class="book-info">
+            <span>고등학교 한문1 평가문제집 겸용 자습서</span><br>
+            <span>배기표, 김호기, 변유경, 김충겸 저 외 1명</span><br>
+            <span>다락원</span><br>
+            <span>2018년 02월</span>
+        </div>
+        <div class="book-price">가격: 15,300원</div>
+    </div>
+
+    <!-- 선배 추천 공부법 섹션 -->
+    <div class="container">
+        <h1>선배 추천 공부법(best!)</h1>
+
+        <div class="study-method">
+            <div class="method-title">1. 가능한 모든 수업 필기를 한다.</div>
+            <div class="method-description">
+                필기를 통해 수업에서 배운 내용을 정리하고, 나중에 복습할 때 도움이 되도록 합니다.
+            </div>
+        </div>
+
+        <div class="study-method">
+            <div class="method-title">2. 본문 내용과 선지를 완전히 암기한다.</div>
+            <div class="method-description">
+                핵심 내용과 선지를 완전히 암기하여 시험에서 자신감을 가질 수 있도록 합니다.
+            </div>
+        </div>
+
+        <div class="study-method">
+            <div class="method-title">3. 회독으로 암기한 것을 공고히 한다.</div>
+            <div class="method-description">
+                여러 번의 회독을 통해 암기한 내용을 공고히 하고, 꾸준한 복습을 통해 장기 기억에 도움을 줍니다.
+            </div>
+        </div>
+    </div>
+</body>
+
+
 {% for comment in comments %}
   <p>{{ comment.author }} - {{ comment.created_at }}</p>
   <p>{{ comment.text }}</p>
@@ -8,7 +228,6 @@
       <button type="submit">Delete Comment</button>
   </form>
 {% endfor %}
-
 <h2>Add a Comment</h2>
 <form method="post" action="{% url 'comments_list_and_add' code=code %}">
   {% csrf_token %}
@@ -27,3 +246,5 @@
   <br>
   <button type="submit">Submit</button>
 </form>
+
+</html>

@@ -1,9 +1,0 @@
-<!-- delete_comment.html -->
-<h2>Delete Comment</h2>
-<p>{{ comment.author }} - {{ comment.created_at }}</p>
-<p>{{ comment.text }}</p>
-<form method="post" action="{% url 'delete_comment' comment.id %}">
-  {% csrf_token %}
-  <input type="password" name="password" placeholder="Enter password" required>
-  <button type="submit">Confirm Deletion</button>
-</form>
