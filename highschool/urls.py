@@ -15,12 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import render
 from django.urls import include, path, re_path
 from startpage.views import start_page, start_page_view
+
+def poll_code_view(request, code):
+    # Use the code to dynamically construct the template name
+    template_name = f'{code}.html'
+    return render(request, template_name, {'question_id': code})
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("polls/", include('polls.urls')),
     path("startpage/", include('startpage.urls')),
+    re_path(r'^(?P<code>\d+)/$', poll_code_view, name='poll_code'),
     re_path(r'^$', start_page, name='root_redirect'),
 ]
